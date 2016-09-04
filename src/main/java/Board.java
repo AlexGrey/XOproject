@@ -14,7 +14,6 @@ public class Board {
     private final String oChar = "O";
     private Cell[][] map = new Cell[3][3];
 
-
     public Board(){
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
@@ -39,6 +38,10 @@ public class Board {
         this.y = y;
     }
 
+    public Cell[][] getMap(){
+        return this.map;
+    }
+
     public String getEmptyChar() {
         return this.emptyChar;
     }
@@ -54,13 +57,12 @@ public class Board {
     public void parseCoordinates(String s){
             int first = Integer.parseInt(s.substring(0, 1));
             int second = Integer.parseInt(s.substring(2));
-            System.out.println(first + " - число, " + second + " - число");
             setX(first);
             setY(second);
     }
 
-    public void recalculate(){
-        map[x][y] = Cell.O;
+    public void recalculate(Cell type){
+        map[x][y] = type;
     }
 
     public void show(){
@@ -69,8 +71,11 @@ public class Board {
                 if (map[i][j] == Cell.EMPTY){
                     System.out.print(getEmptyChar());
                 }
-                if (map[i][j] == Cell.O){
+                else if (map[i][j] == Cell.O){
                     System.out.print(getoChar());
+                }
+                else if (map[i][j] == Cell.X){
+                    System.out.print(getxChar());
                 }
             }
             System.out.println("");
